@@ -1,10 +1,10 @@
 (in-package :gamekit.ui)
 
-(defmethod draw-widget ((this widget))
+(defmethod draw-widget ((this widget) &key (offset (vec2 0 0)))
   (typecase this
-    (label (draw-label this))
-    (panel (draw-panel this))
-    (button (draw-button this))))
+    (label (draw-label this :offset offset))
+    (panel (draw-panel this :offset offset))
+    (button (draw-button this :offset offset))))
 
 (defmethod draw-label ((this label) &key (offset (vec2 0 0)))
   (unless (and (width this) (height this))
@@ -69,19 +69,13 @@
                        :fill-paint fill-color
                        :rounding rounding)
     (loop for child in children
-          do (typecase child
-               (label (draw-label child :offset (gamekit:add offset position)))
-               (button (draw-button child :offset (gamekit:add offset position)))
-               (panel (draw-panel child :offset (gamekit:add offset position)))))))
+          do (draw-widget child :offset (gamekit:add offset position)))))
 
 (defmethod draw-panel ((this image-panel) &key (offset (Vec2 0 0)))
   (with-slots (children position image) this
     (gamekit:draw-image (gamekit:add position offset) image)
     (loop for child in children
-          do (typecase child
-               (label (draw-label child :offset (gamekit:add offset position)))
-               (button (draw-button child :offset (gamekit:add offset position)))
-               (panel (draw-panel child :offset (gamekit:add offset position)))))))
+          do (draw-widget child :offset (gamekit:add offset position)))))
 
 
 (defmethod mouse-in-button ((this button) &key (offset (vec2 0 0)))
