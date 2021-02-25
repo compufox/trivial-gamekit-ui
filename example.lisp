@@ -39,12 +39,15 @@
                                   :fill-color gamekit.colors:+cadetblue+
                                   :hover-color gamekit.colors:+blue+
                                   :rounding 7))
+(defparameter *bar* (make-progress-bar 100 25 :position (vec2 300 400) :fill-color gamekit.colors:+pink+ :percent .5
+                                       :rounding 5 :inner-color gamekit.colors:+steelblue+ :show-percent t))
 
 (defmethod gamekit:draw ((this example))
   (draw-widget *panel*)
   (draw-widget *label1*)
   (draw-widget *label2*)
-  (draw-widget *btn1*))
+  (draw-widget *btn1*)
+  (draw-widget *bar*))
    
 (defun run ()
   (start 'example)

@@ -78,8 +78,20 @@
                :accessor fill-color)))
 
 (defclass image-panel (panel with-image) ())
- 
 
+(defclass progress-bar (panel)
+  ((percent :initform 0
+            :initarg :percent
+            :accessor percent)
+   (inner-panel :initform nil
+                :initarg :inner
+                :reader inner)
+   (label :initform nil
+          :initarg :label
+          :reader label)))
+
+
+;; custom setf stuff
 (defmethod (setf size) :after (value (this label))
   (setf (width this) nil
         (height this) nil))
@@ -101,3 +113,34 @@
     (update-bounds label)
     (setf (width this) (* 1.25 (width label))
           (height this) (* 1.25 (height label)))))
+
+(defmethod (setf width) :after (value (this progress-bar))
+  ;; update the width of the child panel
+  ;; update its position, too? so that there will be a
+  ;; buffer around the edges
+  (setf (width (inner this))
+        (max 0 (- (gamekit:lerp 0 (* .95 value) (percent this))
+                  (* .05 value)))
+
+        (widget-position (inner this)) (vec2 (* .05 value) (* .2 (height this))))
+  (setf (widget-position (label this)) (gamekit:add (widget-position (inner this))
+                                                    (vec2 (/ (* .75 (width this)) 2)
+                                                          (* .4 (height (inner this)))))))
+
+(defmethod (setf height) :after (value (this progress-bar))
+  (setf (height (inner this)) (* .6 value)
+        (widget-position (inner this)) (vec2 (* .05 (width this)) (* .2 value)))
+  (setf (widget-position (label this)) (gamekit:add (widget-position (inner this))
+                                                    (vec2 (/ (* .75 (width this)) 2)
+                                                          (* .4 (height (inner this)))))))
+
+(defmethod (setf percent) :after (value (this progress-bar))
+  ;; update the width of the child panel
+  ;; update its position, too? so that there will be a
+  ;; buffer around the edges
+  (setf (width (inner this))
+        (max 0 (- (gamekit:lerp 0 (* .95 (width this)) (percent this))
+                  (* .05 (width this)))))
+  (when (label this)
+    (setf (text (label this))
+          (format nil "~A%" (round (* value 100))))))

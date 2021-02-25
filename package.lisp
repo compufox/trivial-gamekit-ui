@@ -4,10 +4,10 @@
   (:use #:cl)
   (:nicknames :gamekit.ui)
   (:import-from :gamekit :vec2 :x :y)
-  (:export :make-label :make-button :make-panel
+  (:export :make-label :make-button :make-panel :make-progress-bar
            :text :size :widget-position :text-color :image 
            :stroke :hover-color :pressed-color
-           :on-click :stroke-thickness
+           :on-click :stroke-thickness :percent
            :hover-image :pressed-image :stroke-color
            :children :width :height :label :rounding
 

@@ -33,3 +33,22 @@
       (make-instance 'panel :position position :width width :height height :children children
                             :fill-color fill-color :stroke-color stroke-color
                             :stroke-thickness stroke-thickness :rounding rounding)))
+
+(defun make-progress-bar (width height &key (position (vec2 0 0)) (fill-color gamekit.colors:+white+)
+                                         (stroke-color gamekit.colors:+transparent+) (stroke-thickness 0)
+                                         (inner-color gamekit.colors:+black+) (rounding 0) (percent 0)
+                                         show-percent (font :default) (font-size 12) (font-color gamekit.colors:+black+))
+  (let* ((inner-pos (vec2 (* .05 width) (* .2 height)))
+         (inner-height (* .6 height))
+         (inner-width (gamekit:lerp 0 (* .95 width) percent))
+         (inner-panel (make-panel :position inner-pos :fill-color inner-color
+                                  :width inner-width :height inner-height))
+         (label (make-label (format nil "~A%" (round (* percent 100)))
+                            :position (vec2 (- (/ width 2) 8)
+                                            (+ (y inner-pos) 3))
+                            :font font
+                            :size font-size
+                            :color font-color)))
+    (make-instance 'progress-bar :position position :width width :height height :rounding rounding :percent percent
+                                 :fill-color fill-color :stroke-color stroke-color :stroke-thickness stroke-thickness
+                                 :label label :inner inner-panel :children (list inner-panel (when show-percent label)))))

@@ -50,6 +50,12 @@ creates and returns a panel
 
 ---
 
+`(make-progress-bar width height &key (position (vec2 0 0)) (fill-color gamekit.colors:+white+) (stroke-color gamekit.colors:+transparent+) (stroke-thickness 0) (inner-color gamekit.colors:+black+) (rounding 0) (percent 0) show-percent (font :default) (font-size 12) (font-color gamekit.colors:+black+))`
+
+creates and returns a progress-bar
+
+---
+
 `(draw-widget this)`
 
 draws a UI widget on the screen
