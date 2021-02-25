@@ -14,15 +14,18 @@
 
   (gethash size (gethash font *font-cache*)))
 
-(defun text-width (text &optional (font gamekit::*font*))
-  (multiple-value-bind (_ text-width) (gamekit:calc-text-bounds text font)
-    (declare (ignore _))
-    text-width))
+(defun text-width (text &key (font :default) (size 12))
+  (let ((fnt (find-or-create-font font size)))
+    (multiple-value-bind (_ text-width) (gamekit:calc-text-bounds text fnt)
+      (declare (ignore _))
+      text-width))
 
-(defun text-height (text &optional (font gamekit::*font*))
-  (multiple-value-bind (_ __ text-height) (gamekit:calc-text-bounds text font)
-    (declare (ignore _ __))
-    text-height))
+(defun text-height (text &key (font :default) (size 12))
+  (let ((fnt (find-or-create-font font size)))
+    (multiple-value-bind (_ __ text-height) (gamekit:calc-text-bounds text fnt)
+      (declare (ignore _ __))
+      text-height))
 
-(defun text-dimensions (text &optional (font gamekit::*font*))
-  (vec2 (text-width text font) (text-height text font)))
+(defun text-dimensions (text &key (font :default) (size 12))
+  (vec2 (text-width text :font font :size size)
+        (text-height text :font font :size size)))

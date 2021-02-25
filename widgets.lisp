@@ -92,8 +92,7 @@
   (setf (text (label this)) value))
 
 (defmethod update-bounds ((this label))
-  (let ((dims (text-dimensions (text this)
-                               (find-or-create-font (font this) (size this)))))
+  (let ((dims (text-dimensions (text this) :font (font this) :size (size this))))
     (setf (width this) (x dims)
           (height this) (y dims))))
 
