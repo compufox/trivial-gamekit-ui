@@ -32,19 +32,19 @@ please see `example.lisp` for more detailed example
 
 ## API
 
-`(make-label (text position &key (font :default) (size 12) (color gamekit.colors:+black+))`
+`(make-label (text &key (position (vec2 0 0)) (font :default) (size 12) (color gamekit.colors:+black+))`
 
 creates and returns a label
 
 ---
 
-`(make-button position &key label (fill-color gamekit.colors:+black+) (hover-color gamekit.colors:+black+) (pressed-color gamekit.colors:+black+) (stroke-color gamekit.colors:+transparent+) (stroke-thickness 0) (rounding 0) image hover-image pressed-image on-click)`
+`(make-button &key (position (vec2 0 0)) label (fill-color gamekit.colors:+black+) (hover-color gamekit.colors:+black+) (pressed-color gamekit.colors:+black+) (stroke-color gamekit.colors:+transparent+) (stroke-thickness 0) (rounding 0) image hover-image pressed-image on-click)`
 
 creates and returns a button
 
 ---
 
-`(make-panel position &key width height children (fill-color gamekit.colors:+black+) (stroke-color gamekit.colors:+transparent+) (stroke-thickness 0) (rounding 0) image)`
+`(make-panel &key (position (vec2 0 0)) width height children (fill-color gamekit.colors:+black+) (stroke-color gamekit.colors:+transparent+) (stroke-thickness 0) (rounding 0) image)`
 
 creates and returns a panel
 

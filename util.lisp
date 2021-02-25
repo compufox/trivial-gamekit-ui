@@ -18,13 +18,13 @@
   (let ((fnt (find-or-create-font font size)))
     (multiple-value-bind (_ text-width) (gamekit:calc-text-bounds text fnt)
       (declare (ignore _))
-      text-width))
+      text-width)))
 
 (defun text-height (text &key (font :default) (size 12))
   (let ((fnt (find-or-create-font font size)))
     (multiple-value-bind (_ __ text-height) (gamekit:calc-text-bounds text fnt)
       (declare (ignore _ __))
-      text-height))
+      text-height)))
 
 (defun text-dimensions (text &key (font :default) (size 12))
   (vec2 (text-width text :font font :size size)
