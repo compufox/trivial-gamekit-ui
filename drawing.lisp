@@ -9,9 +9,14 @@
 (defmethod draw-label ((this label) &key (offset (vec2 0 0)))
   (unless (and (width this) (height this))
     (update-bounds this))
-  (gamekit:draw-text (text this) (gamekit:add offset (widget-position this))
+  (let* ((pos+offset (gamekit:add offset (widget-position this)))
+         (pos (case (justification this)
+                (:left pos+offset)
+                (:right (gamekit:subt pos+offset (vec2 (width this) 0)))
+                (:center (gamekit:subt pos+offset (vec2 (/ (width this) 2) 0))))))
+  (gamekit:draw-text (text this) pos
                      :fill-color (text-color this)
-                     :font (find-or-create-font (font this) (size this))))
+                     :font (find-or-create-font (font this) (size this)))))
 
 (defmethod draw-button ((this button) &key (offset (vec2 0 0)))
   (with-slots (label rounding width height position

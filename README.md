@@ -32,7 +32,7 @@ please see `example.lisp` for more detailed example
 
 ## API
 
-`(make-label (text &key (position (vec2 0 0)) (font :default) (size 12) (color gamekit.colors:+black+))`
+`(make-label (text &key (position (vec2 0 0)) (font :default) (size 12) (color gamekit.colors:+black+) (justification :left))`
 
 creates and returns a label
 
@@ -80,7 +80,7 @@ returns a vec2 of the width and height of TEXT using FONT
 
 ---
 
-accessors exported: `text` `size` `widget-position` `text-color` `image` `stroke` `hover-color` `pressed-color` `on-click` `stroke-thickness` `hover-image` `pressed-image` `stroke-color` `children` `width` `height` `label` `rounding`
+accessors exported: `text` `size` `widget-position` `text-color` `image` `stroke` `hover-color` `pressed-color` `on-click` `stroke-thickness` `hover-image` `pressed-image` `stroke-color` `children` `width` `height` `label` `rounding` `justification`
 
 ---
 

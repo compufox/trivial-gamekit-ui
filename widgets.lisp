@@ -21,6 +21,9 @@
    (size :initarg :size
          :initform 12
          :accessor size)
+   (justification :initarg :justification
+                  :initform :left
+                  :accessor justification)
    (text-color :initarg :text-color
                :initform gamekit.colors:+black+
                :accessor text-color)))

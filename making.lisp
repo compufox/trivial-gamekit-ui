@@ -1,11 +1,13 @@
 (in-package :gamekit.ui)
 
-(defun make-label (text &key (position (vec2 0 0)) (font :default) (size 12) (color gamekit.colors:+black+))
+(defun make-label (text &key (position (vec2 0 0)) (font :default) (size 12) (color gamekit.colors:+black+)
+                          (justification :left))
   "creates and returns a label object"
   (find-or-create-font font size)
   (make-instance 'label :text text :position position
                         :text-color color
                         :font font
+                        :justification justification
                         :size size))
 
 (defun make-button (&key (position (vec2 0 0)) label (fill-color gamekit.colors:+black+)
