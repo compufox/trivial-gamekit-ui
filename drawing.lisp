@@ -69,9 +69,11 @@
       (gamekit:draw-image (gamekit:add offset (widget-position this)) im))))
 
 (defmethod draw-panel ((this panel) &key (offset (vec2 0 0)))
-  (with-slots (children position width height fill-color rounding) this
+  (with-slots (children position width stroke-color stroke-thickness height fill-color rounding) this
     (gamekit:draw-rect (gamekit:add offset position) width height
                        :fill-paint fill-color
+                       :stroke-paint stroke-color
+                       :thickness stroke-thickness
                        :rounding rounding)
     (loop for child in children
           do (draw-widget child :offset (gamekit:add offset position)))))
