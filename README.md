@@ -122,7 +122,7 @@ returns a vec2 of the width and height of TEXT using FONT
 
 ---
 
-accessors exported: `text` `size` `widget-position` `text-color` `image` `stroke` `hover-color` `pressed-color` `on-click` `stroke-thickness` `hover-image` `pressed-image` `stroke-color` `children` `width` `height` `label` `rounding` `justification`
+accessors exported: `text` `size` `widget-position` `text-color` `image` `stroke` `hover-color` `pressed-color` `on-click` `stroke-thickness` `hover-image` `pressed-image` `stroke-color` `children` `width` `height` `label` `rounding` `justification` `render`
 
 ---
 

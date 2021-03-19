@@ -10,7 +10,7 @@
            :on-click :stroke-thickness :percent
            :hover-image :pressed-image :stroke-color
            :children :width :height :label :rounding
-           :justification
+           :justification :render
 
            :text-width :text-height :text-dimensions
            :draw-widget

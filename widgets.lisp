@@ -9,7 +9,9 @@
            :accessor height)
    (position :initarg :position
              :initform (vec2 0 0)
-             :accessor widget-position)))
+             :accessor widget-position)
+   (render :initarg :render
+           :accessor render)))
 
 (defclass with-text ()
   ((text :initarg :text

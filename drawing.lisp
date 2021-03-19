@@ -1,10 +1,11 @@
 (in-package :gamekit.ui)
 
 (defmethod draw-widget ((this widget) &key (offset (vec2 0 0)))
-  (typecase this
-    (label (draw-label this :offset offset))
-    (panel (draw-panel this :offset offset))
-    (button (draw-button this :offset offset))))
+  (when (render this)
+    (typecase this
+      (label (draw-label this :offset offset))
+      (panel (draw-panel this :offset offset))
+      (button (draw-button this :offset offset)))))
 
 (defmethod draw-label ((this label) &key (offset (vec2 0 0)))
   (unless (and (width this) (height this))
@@ -14,9 +15,9 @@
                 (:left pos+offset)
                 (:right (gamekit:subt pos+offset (vec2 (width this) 0)))
                 (:center (gamekit:subt pos+offset (vec2 (/ (width this) 2) 0))))))
-  (gamekit:draw-text (text this) pos
-                     :fill-color (text-color this)
-                     :font (find-or-create-font (font this) (size this)))))
+   (gamekit:draw-text (text this) pos
+                      :fill-color (text-color this)
+                      :font (find-or-create-font (font this) (size this)))))
 
 (defmethod draw-button ((this button) &key (offset (vec2 0 0)))
   (with-slots (label rounding width height position
