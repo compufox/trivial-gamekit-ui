@@ -15,7 +15,8 @@
            :text-width :text-height :text-dimensions
            :draw-widget
 
-           :ui-mouse-handler :ui-click-handler :ui-release-handler))
+           :ui-mouse-handler :ui-click-handler :ui-release-handler
+           :with-ui :initialize-ui :draw-ui :ui-element))
 
 (in-package :gamekit.ui)
 

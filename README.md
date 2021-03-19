@@ -15,20 +15,34 @@ $ ros run # (or run whichever lisp you use)
 
 ## Usage
 
-Create a UI element (label, button, panel)
+Define your game with the `with-ui` superclass
 
-`(defvar *my-label* (make-label "Hello World!" (vec2 50 50) :color gamekit.colors:+black+))`
+```lisp
+(gamekit:defgame your-game (with-ui) ()
+  ...)
+```
+
+in your `gamekit:post-initialize`:
+
+```lisp
+(defmethod gamekit:post-initialize ((this your-game))
+  ...
+  (initalize-ui this
+    (:label (make-label "Hello World!" (vec2 50 50) :color gamekit.colors:+black+)))
+  ...)
+```
 
 then in your `gamekit:draw`
 
 ```lisp
 (defmethod gamekit:draw ((this your-game))
   ...
-  (draw-widget *my-label*)
+  (draw-ui this)
   ...)
 ```
 
-please see `example.lisp` for more detailed example
+
+please see `example.lisp` for a more detailed example
 
 ## API
 
@@ -59,6 +73,34 @@ creates and returns a progress-bar
 `(draw-widget this)`
 
 draws a UI widget on the screen
+
+---
+
+`(ui-element state-or-game element)`
+
+returns a UI widget from STATE-OR-GAME identified by ELEMENT
+
+ex: `(ui-element (gamekit.fistmachine:current-state) :score-label)`
+
+---
+
+`(setf (ui-element state-or-game element) widget)`
+
+sets a UI widget in STATE-OR-GAME, identified by ELEMENT
+
+---
+
+`(draw-ui state-or-game)`
+
+draws all ui elements of state-or-game
+
+---
+
+`(initialize-ui state-or-game &rest forms)`
+
+macro that allows you to set multiple widgets in STATE-OR-GAME at once
+
+each form in FORMS should be (IDENTIFIER WIDGET)
 
 ---
 
